@@ -10,3 +10,15 @@ body {
     border-right: 5px solid #08f;
     margin: 20px
 }
+
+@media screen and ( orientation: portrait ) {
+    body {
+        ytransform: rotate(90deg);
+        transform-origin: top left;
+        width: 100vh;
+        height: 100vw;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+}
