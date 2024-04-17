@@ -1,10 +1,10 @@
-//board
+// board
 let board;
 let boardWidth = 1000;
 let boardHeight = 400;
 let context;
 
-//players
+// players
 let playerWidth = 10;
 let playerHeight = 50;
 let playerVelocityY = 0;
@@ -25,7 +25,7 @@ let player2 = {
     velocityY : 0
 }
 
-//ball
+// ball
 let ballWidth = 10;
 let ballHeight = 10;
 let ball = {
@@ -40,27 +40,26 @@ let ball = {
 let player1Score = 0;
 let player2Score = 0;
 
-window.onload = function() {
+window.onload = function () {
     board = document.getElementById("board");
     board.height = boardHeight;
     board.width = boardWidth;
-    context = board.getContext("2d"); //used for drawing on the board
+    context = board.getContext("2d");
 
-    //draw initial player1
-    context.fillStyle="#08f";
+    context.fillStyle = "#08f";
     context.fillRect(player1.x, player1.y, playerWidth, playerHeight);
 
     requestAnimationFrame(update);
-    document.addEventListener("keyup", movePlayer);
     document.addEventListener("touchstart", handleTouchStart, false);
     document.addEventListener("touchmove", handleTouchMove, false);
 }
 
-// Bile bonus
+
+// Bonus balls
 let bonusBalls = [];
 let bonusBallSize = 7;
 
-// Desenarea bilelor bonus
+// Draw bonus balls
 function drawBonusBalls() {
     context.fillStyle = "red";
     for (let bonusBall of bonusBalls) {
@@ -72,7 +71,7 @@ function drawBonusBalls() {
     }
 }
 
-// Generarea bilelor bonus
+// Generate bonus balls
 function generateBonusBalls() {
     for (let value of [1, 1]) {
         let newBall = {
@@ -84,7 +83,7 @@ function generateBonusBalls() {
     }
 }
 
-// Verificarea coliziunilor cu bilele bonus
+// Check collision with bonus balls
 function checkBonusCollision() {
     for (let i = bonusBalls.length - 1; i >= 0; i--) {
         if (detectCollision(ball, {
@@ -98,9 +97,6 @@ function checkBonusCollision() {
         }
     }
 }
-
-
-
 
 function update() {
     requestAnimationFrame(update);
@@ -129,14 +125,14 @@ function update() {
     }
     context.fillRect(player2.x, player2.y, playerWidth, playerHeight);
 
-    // Bile bonus
+    // Bonus balls
     if (bonusBalls.length === 0) {
         generateBonusBalls();
     }
     drawBonusBalls();
     checkBonusCollision();
 
-    // Bila principală
+    // Main ball
     context.fillStyle = "white";
     ball.x += ball.velocityX;
     ball.y += ball.velocityY;
@@ -178,18 +174,18 @@ function outOfBounds(yPosition) {
 
 function movePlayer(e) {
     //player1
-    if (e.code == "KeyW") {
+    if (e.code == "KeyA") {
         player1.velocityY = -3;
     }
-    else if (e.code == "KeyS") {
+    else if (e.code == "KeyD") {
         player1.velocityY = 3;
     }
 
     //player2
-    if (e.code == "ArrowUp") {
+    if (e.code == "ArrowLeft") {
         player2.velocityY = -3;
     }
-    else if (e.code == "ArrowDown") {
+    else if (e.code == "ArrowRight") {
         player2.velocityY = 3;
     }
 }
@@ -198,24 +194,36 @@ let touchYStart = null;
 
 function handleTouchStart(event) {
     touchYStart = event.touches[0].clientY;
+    touchXStart = event.touches[0].clientX;
 }
 
 function handleTouchMove(event) {
-    if (!touchYStart) {
+    if (!touchYStart || !touchXStart) {
         return;
     }
 
     let touchYEnd = event.touches[0].clientY;
-    let deltaY = touchYEnd - touchYStart;
+    let touchXEnd = event.touches[0].clientX;
 
-    //player1
-    if (deltaY < 0) {
-        player1.velocityY = -3;
+    let deltaY = touchYEnd - touchYStart;
+    let deltaX = touchXEnd - touchXStart;
+
+    if (Math.abs(deltaY) > Math.abs(deltaX)) {
+        if (deltaY < 0) {
+            player1.velocityY = -3;
+        } else {
+            player1.velocityY = 3;
+        }
     } else {
-        player1.velocityY = 3;
+        if (deltaX < 0) {
+            player1.velocityY = -3;
+        } else {
+            player1.velocityY = 3;
+        }
     }
 
     touchYStart = touchYEnd;
+    touchXStart = touchXEnd;
 }
 
 function detectCollision(circle, rect) {
@@ -233,14 +241,14 @@ function detectCollision(circle, rect) {
     return (dx * dx + dy * dy <= (circle.width / 2 * circle.width / 2));
 }
 
-
 function resetGame(direction) {
     ball = {
         x : Math.random() * (boardWidth - ballWidth),
         y : Math.random() * (boardHeight - ballHeight),
         width: ballWidth,
         height: ballHeight,
-        velocityX : direction * 6,
+        velocityX : direction * 4,
         velocityY : 4
     }
-} resetGame(1)
+}
+resetGame(1);
