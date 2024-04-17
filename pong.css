@@ -15,7 +15,7 @@ body {
     #board {
         transform: rotate(-90deg) translateY(-100%);
         transform-origin: right top;
-        width: 90vh;
+        width: 80vh;
         height: 80vw;
         position: fixed;
         top: -3%;
