@@ -74,7 +74,7 @@ function drawBonusBalls() {
 
 // Generarea bilelor bonus
 function generateBonusBalls() {
-    for (let value of [3, 3]) {
+    for (let value of [1, 1]) {
         let newBall = {
             x: Math.random() * (boardWidth - bonusBallSize * 2) + bonusBallSize,
             y: Math.random() * (boardHeight - bonusBallSize * 2) + bonusBallSize,
