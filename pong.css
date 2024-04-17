@@ -8,17 +8,17 @@ body {
     background-color: black;
     border-left: 5px solid #08f;
     border-right: 5px solid #08f;
-    margin: 20px
+    margin: 20px;
 }
 
-@media screen and ( orientation: portrait ) {
-    body {
-        ytransform: rotate(90deg);
-        transform-origin: top left;
-        width: 100vh;
-        height: 100vw;
+@media screen and (orientation: portrait) {
+    #board {
+        transform: rotate(-90deg) translateY(-100%);
+        transform-origin: right top;
+        width: 90vh;
+        height: 80vw;
         position: fixed;
         top: 0;
-        left: 0;
+        left: -85%;
     }
 }
