@@ -10,10 +10,139 @@
 <div class="contain-menu">
 	<div style="position:relative;">
 		<img src="./img/img.png" alt="" style="width: 350px; height: 800px">
-		<a href="./index.html">
-			<div style="position: absolute; top: 466px; background: transparent; width: 350px; height: 45px"></div>
-		</a>
+			<div style="position: absolute; top: 466px; background: transparent; width: 350px; height: 45px">
+				<div class="dropdown" style="margin-left: 30px">
+					<div class="dropdown-btn" onclick="openDropdown()">
+						Service
+					</div>
+					<div class="dropdown-area" id="dropArea">
+						<ul>
+							<a href="./index.html">
+								<li>Pong</li>
+							</a>
+							<li>Mario</li>
+							<li>Strike</li>
+							<li>Dump</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 	</div>
+	<div class="container">
+
 </div>
 </body>
 </html>
+
+<script>
+	let dropArea = document.getElementById('dropArea');
+	function openDropdown() {
+		console.log("Dropdown");
+		dropArea.classList.toggle("activeDropArea");
+	}
+</script>
+
+<style>
+
+	.title {
+		text-align: center;
+		padding-top: 100px;
+		margin-bottom: 30px;
+	}
+	.title h1 {
+		font-size: 20px;
+		text-transform: uppercase;
+	}
+	.title p {
+		font-size: 16px;
+		margin: 0;
+	}
+	.container {
+		display: flex;
+		height: 100vh;
+		justify-content: center;
+	}
+
+	.dropdown {
+		margin-top: 10px;
+	}
+
+	.dropdown-btn {
+		background-color: transparent;
+		color: transparent;
+		padding: 10px;
+		width: 200px;
+		cursor: pointer;
+		z-index: 10;
+		overflow: hidden;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	.dropdown-area {
+		width: 220px;
+		transform: translateY(-35px);
+		opacity: 0;
+		pointer-events: none;
+		z-index: -1;
+	}
+
+	.dropdown-area ul {
+		padding: 0;
+		list-style: none;
+	}
+
+	.dropdown-area ul li {
+		border-bottom: 1px solid #eee;
+		padding: 10px;
+		cursor: pointer;
+		transition: .3s;
+	}
+
+	.dropdown-area ul li:nth-child(1) {
+		background-color: rgba(0, 136, 255, 0.4);
+		margin-top: -20px;
+		transition: .3s;		color: #fff;
+
+	}
+
+	.dropdown-area ul li:nth-child(2) {
+		background-color: rgba(0, 136, 255, 0.99);
+		margin-top: -40px;
+		transition: .5s;		color: #fff;
+
+	}
+
+	.dropdown-area ul li:nth-child(3) {
+		background-color: rgba(0, 136, 255, 0.96);
+		margin-top: -40px;
+		transition: .6s;
+		color: #fff;
+	}
+
+	.dropdown-area ul li:nth-child(4) {
+		background-color: rgba(0, 136, 255, 0.8);
+		margin-top: -40px;
+		transition: .7s;
+		color: #fff;
+	}
+
+	.dropdown-area ul li:nth-child(5) {
+		background-color: rgba(0, 136, 255, 0.9);
+		margin-top: -40px;
+		transition: .8s;
+		color: #fff;
+	}
+
+
+	.activeDropArea {
+		opacity: 1;
+		pointer-events: all;
+		transform: translateY(-15px);
+	}
+
+	.activeDropArea ul li:nth-child(1),.activeDropArea ul li:nth-child(2),.activeDropArea ul li:nth-child(3),.activeDropArea ul li:nth-child(4),.activeDropArea ul li:nth-child(5) {
+		margin-top: 0;
+	}
+</style>
